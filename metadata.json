@@ -1,0 +1,6 @@
+{
+  "name": "Arateii - Event & Venue Management",
+  "description": "Warm organic event and venue management platform for tracking weddings, bookings, budgets, and clients.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

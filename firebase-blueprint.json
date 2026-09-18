@@ -1,0 +1,79 @@
+{
+  "version": "1.0",
+  "entities": {
+    "User": {
+      "collection": "users",
+      "fields": {
+        "email": { "type": "string", "description": "Email address of the user", "required": true },
+        "displayName": { "type": "string", "description": "Full name or business display name", "required": true },
+        "phone": { "type": "string", "description": "Mobile phone number for communication and recovery", "required": false },
+        "role": { "type": "string", "description": "User role such as admin, planner, coordinator", "required": false },
+        "createdAt": { "type": "string", "description": "ISO timestamp of account creation", "required": true },
+        "updatedAt": { "type": "string", "description": "ISO timestamp of last profile update", "required": false }
+      }
+    },
+    "Event": {
+      "collection": "events",
+      "fields": {
+        "clientName": { "type": "string", "description": "Client name or event title", "required": true },
+        "eventType": { "type": "string", "description": "Type of event (Boda, XV, Corporativo, etc.)", "required": true },
+        "date": { "type": "string", "description": "Event date ISO string", "required": true },
+        "displayDate": { "type": "string", "description": "Formatted date for display", "required": true },
+        "time": { "type": "string", "description": "Time range string", "required": true },
+        "space": { "type": "string", "description": "Venue space", "required": true },
+        "guestCount": { "type": "number", "description": "Number of guests", "required": true },
+        "status": { "type": "string", "description": "confirmed, quote, completed, cancelled", "required": true },
+        "totalAmount": { "type": "number", "description": "Total amount in ARS", "required": true },
+        "paidAmount": { "type": "number", "description": "Paid amount in ARS", "required": true },
+        "contactPhone": { "type": "string", "description": "Contact phone number", "required": false },
+        "contactEmail": { "type": "string", "description": "Contact email address", "required": false },
+        "notes": { "type": "string", "description": "Event operational notes", "required": false },
+        "createdBy": { "type": "string", "description": "UID of the user who registered the event", "required": false },
+        "checklist": { "type": "array", "description": "Checklist items with title, completed status, category", "required": false }
+      }
+    },
+    "FollowUp": {
+      "collection": "followUps",
+      "fields": {
+        "clientName": { "type": "string", "description": "Client name", "required": true },
+        "type": { "type": "string", "description": "Category or event type", "required": true },
+        "dueDate": { "type": "string", "description": "Relative or formatted due date", "required": true },
+        "taskDescription": { "type": "string", "description": "Description of the follow-up task", "required": true },
+        "completed": { "type": "boolean", "description": "Whether task is finished", "required": true },
+        "phone": { "type": "string", "description": "Phone number to reach client", "required": false }
+      }
+    },
+    "Receivable": {
+      "collection": "receivables",
+      "fields": {
+        "clientName": { "type": "string", "description": "Client name", "required": true },
+        "eventType": { "type": "string", "description": "Event type", "required": true },
+        "balanceDue": { "type": "number", "description": "Pending balance in ARS", "required": true },
+        "dueDate": { "type": "string", "description": "Payment due date", "required": true }
+      }
+    },
+    "Client": {
+      "collection": "clients",
+      "fields": {
+        "name": { "type": "string", "description": "Client lead name", "required": true },
+        "eventType": { "type": "string", "description": "Event type interested in", "required": true },
+        "desiredDate": { "type": "string", "description": "Desired event date", "required": true },
+        "guestCount": { "type": "number", "description": "Estimated guest count", "required": true },
+        "stage": { "type": "string", "description": "visit, quote, contract, completed", "required": true },
+        "budgetEstimate": { "type": "number", "description": "Budget estimate in ARS", "required": true },
+        "phone": { "type": "string", "description": "Client contact phone", "required": false },
+        "email": { "type": "string", "description": "Client contact email", "required": false },
+        "lastContact": { "type": "string", "description": "Date or relative string of last touchpoint", "required": false }
+      }
+    },
+    "PhoneRecoveryRequest": {
+      "collection": "recoveryRequests",
+      "fields": {
+        "phone": { "type": "string", "description": "Phone number requesting recovery", "required": true },
+        "code": { "type": "string", "description": "Generated verification code", "required": true },
+        "createdAt": { "type": "string", "description": "Timestamp of creation", "required": true },
+        "status": { "type": "string", "description": "pending, verified, expired", "required": true }
+      }
+    }
+  }
+}

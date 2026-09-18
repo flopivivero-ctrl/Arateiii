@@ -1,0 +1,47 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper to check if the request comes from an authenticated user
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Helper to verify the user owns the record
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // User profiles
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow create, update: if isOwner(userId);
+      allow delete: if false;
+    }
+
+    // Operational event records for the team
+    match /events/{eventId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    // Follow-ups & tasks
+    match /followUps/{followUpId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    // Account receivables
+    match /receivables/{receivableId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    // CRM Leads and clients
+    match /clients/{clientId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    // Recovery requests (temporary codes for phone verification)
+    match /recoveryRequests/{requestId} {
+      allow create: if true;
+      allow read, update: if true;
+    }
+  }
+}
